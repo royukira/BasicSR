@@ -4,7 +4,7 @@ import numpy as np
 import cv2
 import torch
 import torch.utils.data as data
-import data.util as util
+import codes.data.util as util
 
 
 class LRHRDataset(data.Dataset):
@@ -44,7 +44,7 @@ class LRHRDataset(data.Dataset):
     def __getitem__(self, index):
         HR_path, LR_path = None, None
         scale = self.opt['scale']
-        HR_size = self.opt['HR_size']
+        HR_size = self.opt['HR_size']   # patch size of HR img
 
         # get HR image
         HR_path = self.paths_HR[index]
@@ -103,11 +103,10 @@ class LRHRDataset(data.Dataset):
             rnd_w = random.randint(0, max(0, W - LR_size))
             img_LR = img_LR[rnd_h:rnd_h + LR_size, rnd_w:rnd_w + LR_size, :]
             rnd_h_HR, rnd_w_HR = int(rnd_h * scale), int(rnd_w * scale)
-            img_HR = img_HR[rnd_h_HR:rnd_h_HR + HR_size, rnd_w_HR:rnd_w_HR + HR_size, :]
+            img_HR = img_HR[rnd_h_HR:rnd_h_HR + HR_size, rnd_w_HR:rnd_w_HR + HR_size, :]  # crop a patch from HR img
 
             # augmentation - flip, rotate
-            img_LR, img_HR = util.augment([img_LR, img_HR], self.opt['use_flip'], \
-                self.opt['use_rot'])
+            img_LR, img_HR = util.augment([img_LR, img_HR], self.opt['use_flip'], self.opt['use_rot'])
 
         # change color space if necessary
         if self.opt['color']:

@@ -82,7 +82,6 @@ class RRDBNet(nn.Module):
 # Discriminator
 ####################
 
-
 # VGG style Discriminator with input size 128*128
 class Discriminator_VGG_128(nn.Module):
     def __init__(self, in_nc, base_nf, norm_type='batch', act_type='leakyrelu', mode='CNA'):
@@ -115,12 +114,10 @@ class Discriminator_VGG_128(nn.Module):
         conv9 = B.conv_block(base_nf*8, base_nf*8, kernel_size=4, stride=2, norm_type=norm_type, \
             act_type=act_type, mode=mode)
         # 4, 512
-        self.features = B.sequential(conv0, conv1, conv2, conv3, conv4, conv5, conv6, conv7, conv8,\
-            conv9)
+        self.features = B.sequential(conv0, conv1, conv2, conv3, conv4, conv5, conv6, conv7, conv8, conv9)
 
         # classifier
-        self.classifier = nn.Sequential(
-            nn.Linear(512 * 4 * 4, 100), nn.LeakyReLU(0.2, True), nn.Linear(100, 1))
+        self.classifier = nn.Sequential(nn.Linear(512 * 4 * 4, 100), nn.LeakyReLU(0.2, True), nn.Linear(100, 1))
 
     def forward(self, x):
         x = self.features(x)

@@ -3,9 +3,9 @@ import glob
 import cv2
 import numpy as np
 import torch
-from data.util import imresize, modcrop
-import utils.util as util
-import models.modules.sft_arch as sft
+from codes.data.util import imresize, modcrop
+import codes.utils.util as util
+import codes.models.modules.sft_arch as sft
 
 # model_path = '../experiments/pretrained_models/sft_net_torch.pth' # torch version
 model_path = '../experiments/pretrained_models/SFTGAN_bicx4_noBN_OST_bg.pth'  # pytorch training

@@ -1,5 +1,5 @@
 {
-  "name": "debug_002_RRDB_ESRGAN_x4_DIV2K" //  please remove "debug_" during training
+  "name": "RRDB_ESRGAN_x4_Office2K" //  please remove "debug_" during training
   , "use_tb_logger": true
   , "model":"srragan"
   , "scale": 4
@@ -7,30 +7,30 @@
 
   , "datasets": {
     "train": {
-      "name": "DIV2K"
+      "name": "OFFICE2K"
       , "mode": "LRHR"
-      , "dataroot_HR": "/mnt/SSD/xtwang/BasicSR_datasets/DIV2K800/DIV2K800_sub.lmdb"
-      , "dataroot_LR": "/mnt/SSD/xtwang/BasicSR_datasets/DIV2K800/DIV2K800_sub_bicLRx4.lmdb"
+      , "dataroot_HR": "E:\\DATA\\Office_HR\\"
+      , "dataroot_LR": "E:\\DATA\\Office_LR\\"
       , "subset_file": null
       , "use_shuffle": true
-      , "n_workers": 8
+      , "n_workers": 4  // if the number of threads is set too large, the memory of CUDA will be run out, please set the reasonable parameter according to the GPU
       , "batch_size": 16
       , "HR_size": 128
       , "use_flip": true
       , "use_rot": true
     }
     , "val": {
-      "name": "val_set14_part"
+      "name": "val_OFFICE2K_part"
       , "mode": "LRHR"
-      , "dataroot_HR": "/mnt/SSD/xtwang/BasicSR_datasets/val_set14_part/Set14"
-      , "dataroot_LR": "/mnt/SSD/xtwang/BasicSR_datasets/val_set14_part/Set14_bicLRx4"
+      , "dataroot_HR": "E:\\DATA\\Office_val_HR\\"
+      , "dataroot_LR": "E:\\DATA\\Office_val_LR\\"
     }
   }
 
   , "path": {
-    "root": "/home/xtwang/Projects/BasicSR"
-    // , "resume_state": "../experiments/debug_002_RRDB_ESRGAN_x4_DIV2K/training_state/16.state"
-    , "pretrain_model_G": "../experiments/pretrained_models/RRDB_PSNR_x4.pth"
+    "root": "E:\\Github\\BasicSR\\"
+    , "resume_state": "E:\\Github\\BasicSR\\experiments\\RRDB_ESRGAN_x4_Office2K\\training_state\\3000.state"
+    , "pretrain_model_G": "E:\\Github\\BasicSR\\pretrain_models\\RRDB_PSNR_x4.pth"
   }
 
   , "network_G": {
@@ -69,7 +69,7 @@
     , "feature_criterion": "l1"
     , "feature_weight": 1
     , "gan_type": "vanilla"
-    , "gan_weight": 5e-3
+    , "gan_weight": 1e-2
 
     //for wgan-gp
     // , "D_update_ratio": 1
@@ -78,11 +78,11 @@
 
     , "manual_seed": 0
     , "niter": 5e5
-    , "val_freq": 5e3
+    , "val_freq": 3e3
   }
 
   , "logger": {
     "print_freq": 200
-    , "save_checkpoint_freq": 5e3
+    , "save_checkpoint_freq": 3e3
   }
 }

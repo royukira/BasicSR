@@ -4,8 +4,8 @@ import torch
 import torch.nn as nn
 from torch.nn import init
 
-import models.modules.architecture as arch
-import models.modules.sft_arch as sft_arch
+import codes.models.modules.architecture as arch
+import codes.models.modules.sft_arch as sft_arch
 logger = logging.getLogger('base')
 ####################
 # initialize

@@ -7,9 +7,9 @@ import numpy as np
 import torch
 import torchvision.utils
 
-import models.modules.seg_arch as seg_arch
-from data.util import imresize, modcrop
-import utils.util as util
+import codes.models.modules.seg_arch as seg_arch
+from codes.data.util import imresize, modcrop
+import codes.utils.util as util
 
 # options
 test_img_folder_name = 'samples'  # image folder name

@@ -10,10 +10,10 @@ import logging
 
 import torch
 
-import options.options as option
-from utils import util
-from data import create_dataloader, create_dataset
-from models import create_model
+import codes.options.options as option
+from codes.utils import util
+from codes.data import create_dataloader, create_dataset
+from codes.models import create_model
 
 
 def main():
@@ -119,6 +119,7 @@ def main():
 
             # validation
             if current_step % opt['train']['val_freq'] == 0:
+                print("--> <epoch:{:3d}, iter:{:8,d}> Validation phase...".format(epoch, current_step))
                 avg_psnr = 0.0
                 idx = 0
                 for val_data in val_loader:
